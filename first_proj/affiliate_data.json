@@ -1,0 +1,55 @@
+{
+    "affiliates": [
+        {
+            "id": "101",
+            "name": "Tech Gadget Pro",
+            "category": "Electronics",
+            "price": 299.99,
+            "currency": "USD",
+            "referralUrl": "https://example.com/product/101",
+            "earnings": 1998.0,
+            "sales": 557
+        },
+        {
+            "id": "102",
+            "name": "Ultimate Kitchen Kit",
+            "category": "Home & Kitchen",
+            "price": 129.99,
+            "currency": "USD",
+            "referralUrl": "https://example.com/product/102",
+            "earnings": "333",
+            "sales": 555
+        },
+        {
+            "id": "103",
+            "name": "Fitness Tracker Band",
+            "category": "Fitness",
+            "price": 59.99,
+            "currency": "USD",
+            "referralUrl": "https://example.com/product/103",
+            "earnings": "333",
+            "sales": 555
+        },
+        {
+            "id": "104",
+            "name": "Eco-friendly Water Bottle",
+            "category": "Sustainable Products",
+            "price": 20.0,
+            "currency": "USD",
+            "referralUrl": "https://example.com/product/104",
+            "earnings": "333",
+            "sales": 555
+        },
+        {
+            "id": "105",
+            "name": "Professional Photography Camera",
+            "category": "Photography",
+            "price": 500.0,
+            "currency": "USD",
+            "referralUrl": "https://example.com/product/105",
+            "earnings": "333",
+            "sales": 555
+        }
+    ],
+    "total_sales": 20080
+}
