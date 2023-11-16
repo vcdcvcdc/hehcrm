@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment History</title>
+</head>
+<body>
+    <h1>Payment History</h1>
+    <table>
+        <tr>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Type</th> <!-- New column for payment type -->
+        </tr>
+        {% for payment in payments %}
+            <tr {% if payment.is_donation %}style="background-color: #D0F0C0;"{% endif %}>
+                <td>{{ payment.amount }}</td>
+                <td>{{ payment.description }}</td>
+                <td>{{ payment.customer_email }}</td>
+                <td>{{ payment.created_date }}</td>
+                <td>{{ payment.status }}</td>
+                <td>{{ "Donation" if payment.is_donation else "Regular" }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

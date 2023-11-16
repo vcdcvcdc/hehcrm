@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import json
 import stripe
 from datetime import datetime, timedelta
@@ -30,7 +30,7 @@ app = Flask(__name__)
 
 
 data_file = 'affiliate_data.json'
-stripe.api_key = 'your_stripe_api_key'
+# stripe.api_key = 'your_stripe_api_key'
 stripe_webhook_secret = 'your_stripe_webhook_secret'
 
 # Initialize or load data
@@ -139,6 +139,43 @@ def stripe_webhook():
 
 # api.add_resource(ConversionAPI, '/conversion/{affiliate_id}')
 # docs.register(ConversionAPI)
+stripe.api_key = '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'
+
+
+@app.route('/', methods=['GET'])
+# def root():
+#     return jsonify({'message': 'congratuations'})
+def dashboard():
+    # Fetch payment intents (you can adjust the limit and other parameters as needed)
+    payments = stripe.PaymentIntent.list(limit=100)
+
+    # Process payments to extract needed information
+    processed_payments = []
+    for payment in payments.auto_paging_iter():
+        # Format the amount (assuming it's in cents) and date
+        amount = payment.amount / 100  # Convert to dollars
+        created_date = datetime.fromtimestamp(
+            payment.created).strftime('%Y-%m-%d %H:%M:%S')
+
+        # Fetch customer email if customer ID is available
+        customer_email = None
+        if payment.customer:
+            customer = stripe.Customer.retrieve(payment.customer)
+            customer_email = customer.email
+
+        # Check if the payment is a donation (customize this based on your criteria)
+        is_donation = 'donation' in (payment.description or '').lower()
+
+        processed_payments.append({
+            'amount': amount,
+            'description': payment.description or 'N/A',
+            'customer_email': customer_email,
+            'created_date': created_date,
+            'status': payment.status,
+            'is_donation': is_donation  # Flag to indicate if it's a donation
+        })
+
+    return render_template('dashboard.html', payments=processed_payments)
 
 
 @app.route('/conversion/<affiliate_id>', methods=['POST'])
